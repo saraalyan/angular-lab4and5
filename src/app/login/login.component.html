@@ -1,0 +1,49 @@
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [(ngModel)]="email"
+            required
+            minlength="10"
+            maxlength="200"
+            #emailInput="ngModel"
+        />
+      @if(emailInput.invalid && emailInput.touched) {
+      <div id="emailInputHelp" class="form-text text-danger">
+        @if(emailInput.errors?.['required']){
+        <span>This field is required</span>
+        }
+      </div>
+      }
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            minlength="3"
+            #passwordInput="ngModel"
+        />
+      @if(passwordInput.invalid && passwordInput.touched){
+      <div id="passwordHelp" class="form-text text-danger">
+        @if(passwordInput.errors?.['required']){
+        <span>This field is required</span>
+        } @if(passwordInput.errors?.['minlength']){
+        <span>Min length is 3</span>
+        }
+      </div>
+      }
+    </div>
+    
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+  </form>

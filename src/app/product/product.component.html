@@ -1,0 +1,19 @@
+
+<div class="container">
+  <div class="col">
+    <!-- <input type="text" [(ngModel)]="searchTerm" (input)="searchUsers()" placeholder="Search..."> -->
+    <!-- <input type="text" [(ngModel)]="searchTerm"  placeholder="Search..."> -->
+
+  </div>
+  <div class="row">
+    <!-- @for( product of users|search:searchTerm ;track user.id ){ -->
+      @for( product of products;track product.id ){
+
+      <div class="col">
+
+      <app-product-card [product]="product"></app-product-card>
+    </div>
+    }
+      
+ 
+</div>

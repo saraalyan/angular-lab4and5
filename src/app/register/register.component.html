@@ -1,0 +1,88 @@
+<h2>registration Form</h2>
+
+<form [formGroup]="gameForm" (ngSubmit)="handleSubmitForm()">
+  <div class="mb-3">
+    <label for="username" class="form-label">username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      formControlName="username"
+    />
+    @if(gameForm.controls['username'].invalid &&
+    gameForm.controls['username'].touched){
+    <div id="usernameHelp" class="form-text text-danger">
+      @if(gameForm.controls['username'].errors?.['required']){
+      <span>This field is required</span>
+      } @if(gameForm.controls['username'].errors?.['minlength']){
+      <span>Min length is 3</span>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">name</label>
+    <input
+      class="form-control"
+      id="name"
+      formControlName="name"
+    />
+    @if(gameForm.controls['name'].invalid &&
+    gameForm.controls['name'].touched) {
+    <div id="emailHelp" class="form-text text-danger">
+      @if(gameForm.controls['name'].errors?.['required']){
+      <span>This field is required</span>
+      } @if(gameForm.controls['name'].errors?.['minlength']){
+      <span>Min is 10</span>
+      } @if(gameForm.controls['name'].errors?.['maxlength']){
+      <span>max is 200</span>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      formControlName="email"
+    />
+    @if(gameForm.controls['email'].invalid &&
+    gameForm.controls['email'].touched) {
+    <div id="emailHelp" class="form-text text-danger">
+      @if(gameForm.controls['email'].errors?.['required']){
+      <span>This field is required</span>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password"
+    class="form-control"
+     id="password" formControlName="password" />
+    <div *ngIf="gameForm.get('password').errors?.required && gameForm.get('password').touched">
+      Password is required.
+    </div>
+    <div *ngIf="gameForm.get('password').errors?.minlength && gameForm.get('password').touched">
+      Password must be at least 6 characters.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirm Password</label>
+    <input
+    class="form-control"
+     type="password" id="confirmPassword" formControlName="confirmPassword" />
+    <div *ngIf="gameForm.get('confirmPassword').errors?.required && gameForm.get('confirmPassword').touched">
+      Confirm Password is required.
+    </div>
+    <div *ngIf="gameForm.get('confirmPassword').errors?.passwordMismatch && gameForm.get('confirmPassword').touched">
+      Passwords do not match.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="gameForm.invalid">Submit</button>
+</form>
