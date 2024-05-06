@@ -63,7 +63,10 @@
     <input type="password"
     class="form-control"
      id="password" formControlName="password" />
-    <div *ngIf="gameForm.get('password').errors?.required && gameForm.get('password').touched">
+      @if(gameForm.controls['email'].errors?.['required']){
+      <span>This field is required</span>
+      }
+     <div *ngIf="gameForm.get('password').errors?.required && gameForm.get('password').touched">
       Password is required.
     </div>
     <div *ngIf="gameForm.get('password').errors?.minlength && gameForm.get('password').touched">

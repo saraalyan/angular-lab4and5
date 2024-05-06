@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { CommonModule } from '@angular/common';
 import { ListproductService } from '../listproduct.service';
+import { Productinterface } from '../productinterface';
 
 @Component({
   selector: 'app-detailsproduct',
@@ -11,6 +12,26 @@ import { ListproductService } from '../listproduct.service';
   templateUrl: './detailsproduct.component.html',
   styleUrl: './detailsproduct.component.css'
 })
+export class DetailsproductComponent implements OnInit {
+  productDetails: any;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ListproductService
+  ) {}
+  addToCart() {
+    console.log('Product added to cart');
+  }
+  ngOnInit() {
+    const param_id = +this.activatedRoute.snapshot.params['id'];
+    this.productService.getProducts().subscribe(response => {
+      const products: Productinterface[] = response.products;
+      this.productDetails = products.find(product => product.id === param_id);
+     
+    });
+    
+  }
+}
 // export class DetailsproductComponent {
 //   products:any[]=[
 //     {
@@ -603,17 +624,3 @@ import { ListproductService } from '../listproduct.service';
 //     console.log(this.productDetails);
 //   }
 // }
-export class DetailsproductComponent implements OnInit {
-  productDetails: any;
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private productService: ListproductService
-  ) {} 
-
-  ngOnInit() {
-
-    const param_id = +this.activatedRoute.snapshot.params['id']; 
-    this.productDetails = this.productService.products.find(product => product.id === param_id);
-  }
-}

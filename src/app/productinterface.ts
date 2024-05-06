@@ -11,4 +11,6 @@ export interface Productinterface {
     thumbnail: string;
     images: string[];
     createdAt: string;
+    quantity: number;
+
 }

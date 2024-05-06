@@ -5,7 +5,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ product.title }}</h5>
                 <p class="card-text">{{ product.price }}</p>
-                <app-star-rating [rating]="product.rate"></app-star-rating>
+                <app-star-rating [rate]="product.rating"></app-star-rating>
 
 
                 <p [ngClass]="product.stock === 0 ? 'text-danger' : 'text-success'">
@@ -13,6 +13,7 @@
                 </p>
 
                 <a class="btn bg-danger text-center" (click)="handelnavigatetodetails(product.id)">view details</a>            </div>
+                <button type="button" class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
 
                
         </div>
